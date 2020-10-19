@@ -1,6 +1,6 @@
 {
   "name": "create-discord-app",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "A package for easily generating discord bot projects",
   "main": "./lib/index.js",
   "license": "MIT",
@@ -12,7 +12,7 @@
     "chalk": "^4.1.0",
     "fs-extra": "^9.0.1",
     "inquirer": "^7.3.3",
-    "package-info": "^3.0.2",
+    "shelljs": "^0.8.4",
     "yargs": "^16.0.3"
   },
   "keywords": [

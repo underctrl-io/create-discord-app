@@ -15,5 +15,5 @@ $ npm i create-discord-app -g
 
 # Create a project
 ```sh
-npx create-discord-app name
+npx create-discord-app 
 ```
