@@ -1,0 +1,42 @@
+{
+  "name": "create-discord-app",
+  "version": "2.0.0",
+  "description": "Discord bot project generator.",
+  "main": "index.js",
+  "preferGlobal": true,
+  "bin": {
+    "create-discord-app": "bin/cda.js",
+    "cda": "bin/cda.js"
+  },
+  "author": "Snowflake Studio ❄",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "fs-extra": "^9.0.1",
+    "inquirer": "^7.3.3",
+    "yargs": "^16.1.0"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevSnowflake/create-discord-app.git"
+  },
+  "keywords": [
+    "cda",
+    "create-discord-app",
+    "discord.js",
+    "discord",
+    "bot",
+    "project",
+    "generator"
+  ],
+  "bugs": {
+    "url": "https://github.com/DevSnowflake/create-discord-app/issues"
+  },
+  "homepage": "https://github.com/DevSnowflake/create-discord-app#readme"
+}
