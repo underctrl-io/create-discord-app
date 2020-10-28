@@ -35,7 +35,7 @@ fs.readdir("./commands", (error, ctg) => {
 
                 // load command in memory
                 client.commands.set(cmd.help.name, cmd);
-                if (cmd.help.aliases && Array.isArray(cmd.help.aliases)) cmd.help.aliases.forEach(alias => client.aliases.set(alias, cmd));
+                if (cmd.help.aliases && Array.isArray(cmd.help.aliases)) cmd.help.aliases.forEach(alias => client.aliases.set(alias, cmd.help.name));
             });
         });
     });
@@ -54,7 +54,7 @@ client.on("messageCreate", async (message) => {
 
     const args = message.content.slice(config.PREFIX.length).trim().split(" ");
     const cmd = args.shift().toLowerCase();
-    const command = client.commands.get(cmd) || client.aliases.get(cmd);
+    const command = client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
 
     if (!command) return;
 
