@@ -17,6 +17,8 @@
     "chalk": "^4.1.0",
     "fs-extra": "^9.0.1",
     "inquirer": "^7.3.3",
+    "log-symbols": "^4.0.0",
+    "ora": "^5.1.0",
     "yargs": "^16.1.0"
   },
   "directories": {
