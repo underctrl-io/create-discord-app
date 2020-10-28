@@ -22,6 +22,15 @@ module.exports = {
             { name: "TypeScript", value: "typescript" }
         ]
     },
+    lib: {
+        name: "lib",
+        type: "list",
+        message: "Select your discord library:",
+        choices: [
+            { name: "Discord.JS", value: "djs" },
+            { name: "Eris", value: "eris" }
+        ]
+    },
     token: {
         name: "token",
         type: "password",

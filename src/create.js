@@ -10,7 +10,7 @@ class Create {
         this.source = source;
     }
 
-    async init(token = null) {
+    async init(token = null, ops = { language: null }) {
         if (!this.source) return console.log(chalk.redBright("[Error] No source file(s) specified!"));
         let path = this.path === "." ? process.cwd() : `${process.cwd()}/${this.path}`;
         if (!fs.existsSync(path)) fs.mkdirSync(path);
@@ -25,13 +25,34 @@ class Create {
                 fs.writeFileSync(path.endsWith("/") ? path + ".env" : path + "/.env", `TOKEN=${token && typeof token === "string" ? token : "ENTER_YOUR_BOT_TOKEN"}`);
             });
             console.log(chalk.cyanBright("\nFinished copying files!"));
-            console.log(chalk.blueBright("\nDownloading dependencies..."));
+            console.log(chalk.blueBright("\nFinalizing..."));
 
-            cp.exec("npm i", (error) => {
+            const command = this.getInstallCommand(ops.language);
+            if (!command) return console.log(chalk.redBright("Generated project but couldn't install dependencies, please try again manually!"));
+
+            cp.exec(command, (error) => {
                 if (error) return console.log(chalk.redBright("Generated project but couldn't install dependencies, please try again manually!"));
-                return console.log(chalk.greenBright("\nSuccessfully installed dependencies!"));
+                return console.log(chalk.greenBright("\nSuccessfully created discord bot project!"));
             });
         });
+    }
+
+    getInstallCommand(language = "js") {
+        let cmd = "";
+        switch(language) {
+            case "node":
+            case "js":
+                cmd = "npm i";
+                break;
+            case "py":
+                cmd = "pip3 install -r requirements.txt";
+                break;
+            default:
+                cmd = null;
+        }
+
+        return cmd;
+
     }
 
 }
