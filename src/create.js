@@ -17,7 +17,7 @@ class Create {
         let path = this.path === "." ? process.cwd() : `${process.cwd()}/${this.path}`;
         if (!fs.existsSync(path)) fs.mkdirSync(path);
 
-        fs.readdir(this.source, (error, files) => {
+        fs.readdir(this.source, async (error, files) => {
             if (error) return console.log(symbols.error, chalk.redBright(error.message));
 
             const copyFileLoader = ora(chalk.cyanBright("Copying files...")).start();
