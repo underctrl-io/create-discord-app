@@ -12,24 +12,24 @@ client.aliases = new Discord.Collection();
 
 // load commands
 // Read command dir and get ctg
-fs.readdir("./commands", (error, ctg) => {
+fs.readdir(`${__dirname}/commands`, (error, ctg) => {
     if (error) throw error;
 
     // loop through ctg
     ctg.forEach(category => {
 
         // read each ctg and get command file
-        fs.readdir(`./commands/${category}`, (err, commands) => {
+        fs.readdir(`${__dirname}/commands/${category}`, (err, commands) => {
             if (err) throw err;
 
             // Load commands in memory
             commands.forEach(command => {
-                const cmd = require(`./commands/${category}/${command}`);
+                const cmd = require(`${__dirname}/commands/${category}/${command}`);
                 if (!cmd.help) throw new Error(`Invalid command file structure ${command}!`);
 
                 // update data
                 cmd.help.category = category;
-                cmd.location = `./commands/${category}/${command}`;
+                cmd.location = `${__dirname}/commands/${category}/${command}`;
 
                 console.log(`Loading command ${command}...`);
 
