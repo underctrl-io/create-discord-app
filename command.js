@@ -3,6 +3,7 @@ const { version } = require("./package.json");
 const create = require("./src/create");
 const { prompt } = require("inquirer");
 const prompts = require("./src/prompts");
+const path = require("path");
 
 const help = `
     ${chalk.cyanBright("Create Discord App")}
@@ -49,7 +50,7 @@ module.exports = async (args) => {
         // none
         else return console.log(chalk.redBright("[Error] Couldn't locate template files!"));
 
-        const cda = new create(args._[0] === "." ? "." : args.dir, projectdir);
+        const cda = new create(path.join(process.cwd(), args._[0] === "." ? "" : args.dir), projectdir);
 
         const lang = () => {
             let l;
