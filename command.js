@@ -22,8 +22,8 @@ module.exports = async (args) => {
     } else if (args.version) {
         console.log(chalk.whiteBright(`v${version}`));
     } else if (args.discord) {
-        console.log(`${chalk.whiteBright("Join Our Discord Server")}:    ${chalk.blueBright("https://discord.gg/2SUybzb")}`); 
-    } else if (args.create || args._[0] && args._[0] === ".") {
+        console.log(`${chalk.whiteBright("Join Our Discord Server")}:    ${chalk.blueBright("https://discord.gg/2SUybzb")}`);
+    } else if (args.create || (args._[0] && args._[0] === ".")) {
         const { ok, type, language, lib, token } = await prompt([
             prompts.dir,
             prompts.type,
@@ -55,7 +55,7 @@ module.exports = async (args) => {
         const lang = () => {
             let l;
 
-            switch(language) {
+            switch (language) {
                 case "javascript":
                 case "typescript":
                     l = "node";
