@@ -12,6 +12,19 @@ class Create {
         this.source = source;
     }
 
+    initGit() {
+        const commands = ["git init", "git add .", "git commit -m \"initial commit\""];
+        const finalizingLoader = ora(chalk.blueBright("Finalizing...")).start();
+
+        for (const command of commands) {
+            try {
+                cp.execSync(this.path === "." ? command : `cd ${this.path} && ${command}`);
+            } catch(e) { /* Do nothing */ }
+        }
+
+        finalizingLoader.succeed(chalk.greenBright("Successfully created discord bot project!"))
+    }
+
     async init(token = null, ops = { language: null }) {
         if (!this.source) return console.log(symbols.error, chalk.redBright("No source file(s) specified!"));
         let path = this.path === "." ? process.cwd() : `${process.cwd()}/${this.path}`;
@@ -28,14 +41,16 @@ class Create {
             }
 
             copyFileLoader.succeed(chalk.cyanBright("Finished copying files!"));
-            const finalizingLoader = ora(chalk.blueBright("Finalizing...")).start();
+            const depInstaller = ora(chalk.blueBright("Installing dependencies...")).start();
 
             const command = this.getInstallCommand(ops.language);
-            if (!command) return finalizingLoader.warn(chalk.yellowBright("Generated project but couldn't install dependencies, please try again manually!"));
+            if (!command) return depInstaller.warn(chalk.yellowBright("Generated project but couldn't install dependencies, please try again manually!"));
 
-            cp.exec(command, (error) => {
-                if (error) return finalizingLoader.warn(chalk.yellowBright("Generated project but couldn't install dependencies, please try again manually!"));
-                return finalizingLoader.succeed(chalk.greenBright("Successfully created discord bot project!"));
+            cp.exec(this.path === "." ? command : `cd ${this.path} && ${command}`, (error) => {
+                if (error) return depInstaller.warn(chalk.yellowBright("Generated project but couldn't install dependencies, please try again manually!"));
+                depInstaller.succeed(chalk.greenBright("Successfully Installed dependencies!"));
+
+                return this.initGit();
             });
         });
     }
@@ -46,9 +61,6 @@ class Create {
             case "node":
             case "js":
                 cmd = "npm i";
-                break;
-            case "py":
-                cmd = "pip3 install -r requirements.txt";
                 break;
             default:
                 cmd = null;

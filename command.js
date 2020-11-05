@@ -11,9 +11,11 @@ const help = `
     ${chalk.whiteBright("--discord")}       : Shows discord support server invite
     ${chalk.whiteBright("--help")}          : Shows help menu
     ${chalk.whiteBright("--version")}       : Shows CDA version
+    ${chalk.whiteBright("--create")}        : Create Project
 
-
-    Example:   ${chalk.gray("$")} ${chalk.blueBright("create-discord-app .")}
+    Examples:
+        ${chalk.gray("$")} ${chalk.blueBright("create-discord-app .")}
+        ${chalk.gray("$")} ${chalk.blueBright("create-discord-app --create --dir=projectDirName")}
 `;
 
 module.exports = async (args) => {
@@ -24,6 +26,7 @@ module.exports = async (args) => {
     } else if (args.discord) {
         console.log(`${chalk.whiteBright("Join Our Discord Server")}:    ${chalk.blueBright("https://discord.gg/2SUybzb")}`);
     } else if (args.create || (args._[0] && args._[0] === ".")) {
+        if (args.create && !args.dir) return console.log(chalk.redBright("dir was not specified!"));
         const { ok, type, language, lib, token } = await prompt([
             prompts.dir,
             prompts.type,
@@ -50,7 +53,7 @@ module.exports = async (args) => {
         // none
         else return console.log(chalk.redBright("[Error] Couldn't locate template files!"));
 
-        const cda = new create(path.join(process.cwd(), args._[0] === "." ? "" : args.dir), projectdir);
+        const cda = new create(args._[0] === "." ? "" : args.dir, projectdir);
 
         const lang = () => {
             let l;
@@ -59,9 +62,6 @@ module.exports = async (args) => {
                 case "javascript":
                 case "typescript":
                     l = "node";
-                    break;
-                case "python":
-                    l = "py";
                     break;
                 default:
                     l = null;
