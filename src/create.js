@@ -38,6 +38,11 @@ class Create {
             for (const file of files) {
                 await fse.copy(`${this.source}/${file}`, `${path}/${file}`);
                 await fse.writeFile(path.endsWith("/") ? path + ".env" : path + "/.env", `TOKEN=${token && typeof token === "string" ? token : "ENTER_YOUR_BOT_TOKEN"}`);
+                await fse.writeFile(path.endsWith("/") ? path + ".gitignore" : path + "/.gitignore", `
+                node_modules/
+                package-lock.json
+                .env
+                `);
             }
 
             copyFileLoader.succeed(chalk.cyanBright("Finished copying files!"));
