@@ -1,6 +1,6 @@
 {
   "name": "create-discord-app",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A Simple CLI to generate discord bot projects easily!",
   "main": "index.js",
   "preferGlobal": true,
