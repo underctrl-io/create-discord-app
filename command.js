@@ -46,7 +46,7 @@ module.exports = async (args) => {
 
         // class
         else if (type === "class" && language === "javascript" && lib === "djs") projectdir = __dirname + "/templates/class/JavaScript/discordjs";
-        else if (type === "class" && language === "typescript" && lib === "eris") projectdir = __dirname + "/templates/class/JavaScript/eris";
+        else if (type === "class" && language === "javascript" && lib === "eris") projectdir = __dirname + "/templates/class/JavaScript/eris";
         else if (type === "class" && language === "typescript" && lib === "djs") projectdir = __dirname + "/templates/class/TypeScript/discordjs";
         else if (type === "class" && language === "typescript" && lib === "eris") projectdir = __dirname + "/templates/class/TypeScript/eris";
 
