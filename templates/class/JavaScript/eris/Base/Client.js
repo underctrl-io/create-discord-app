@@ -1,7 +1,7 @@
-const { Client: DiscordClient, Collection } = require("eris");
+const { Client: ErisClient, Collection } = require("eris");
 const fs = require("fs");
 
-class Client extends DiscordClient {
+class Client extends ErisClient {
 
     constructor(...args) {
         super(...args);
@@ -61,7 +61,7 @@ class Client extends DiscordClient {
         this.registerCommands();
         this.registerEvents();
 
-        return super.login(token);
+        return super.connect(token);
     }
 
 }
