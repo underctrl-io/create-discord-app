@@ -48,6 +48,10 @@ export interface Command {
     location?: string;
 }
 
+export interface CommandConstructor {
+    new(): Command;
+}
+
 const client = new Client(config.TOKEN);
 
 // load commands
@@ -64,7 +68,7 @@ fs.readdir(`${__dirname}/commands`, (error, ctg) => {
 
             // Load commands in memory
             commands.forEach(command => {
-                const cmd: Command = new (require(`${__dirname}/commands/${category}/${command}`).default);
+                const cmd: Command = new (require(`${__dirname}/commands/${category}/${command}`).default as CommandConstructor);
                 if (!cmd.help) throw new Error(`Invalid command file structure ${command}!`);
 
                 // update data
