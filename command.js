@@ -53,7 +53,7 @@ module.exports = async (args) => {
         // none
         else return console.log(chalk.redBright("[Error] Couldn't locate template files!"));
 
-        const cda = new create(args._[0] === "." ? "" : args.dir, projectdir);
+        const cda = new create(args._[0] === "." ? "" : args.dir, projectdir, !!args.force);
 
         const lang = () => {
             let l;

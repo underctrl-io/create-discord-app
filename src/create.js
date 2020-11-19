@@ -7,13 +7,14 @@ const symbols = require("log-symbols");
 
 class Create {
 
-    constructor(path = ".", source = null) {
+    constructor(path = ".", source = null, force = false) {
         this.path = path || ".";
         this.source = source;
+        this.force = !!force;
     }
 
     initGit() {
-        const commands = ["git init", "git add .", "git commit -m \"initial commit\""];
+        const commands = ["git init", "git add .", "git commit -m \"create discord bot\""];
         const finalizingLoader = ora(chalk.blueBright("Finalizing...")).start();
 
         for (const command of commands) {
@@ -22,13 +23,20 @@ class Create {
             } catch(e) { /* Do nothing */ }
         }
 
-        finalizingLoader.succeed(chalk.greenBright("Successfully created discord bot project!"))
+        finalizingLoader.succeed(chalk.greenBright("Successfully created discord bot project!"));
     }
 
     async init(token = null, ops = { language: null }) {
+        if (!!this.force) console.log(symbols.warning, chalk.yellowBright("Using --force, I hope you know what you are doing"));
         if (!this.source) return console.log(symbols.error, chalk.redBright("No source file(s) specified!"));
         let path = this.path === "." ? process.cwd() : `${process.cwd()}/${this.path}`;
         if (!fs.existsSync(path)) fs.mkdirSync(path);
+        if (fs.readdirSync(path).length !== 0 && !this.force) return console.log(symbols.error, chalk.redBright("Mentioned directory is not empty! Use --force to override this.")); 
+        else if (!!this.force && fs.readdirSync(path).length !== 0) {
+            console.log(symbols.warning, chalk.yellowBright("Using --force, Content found in the specified dir, clearing..."));
+            fse.emptyDirSync(path);
+            console.log(symbols.success, chalk.greenBright("Directory cleared successfully!"));
+        }
 
         fs.readdir(this.source, async (error, files) => {
             if (error) return console.log(symbols.error, chalk.redBright(error.message));

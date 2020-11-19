@@ -2,11 +2,12 @@
 A Simple CLI to generate discord bot projects easily!
 
 # Example
+## Current Dir
 ```sh
 $ npx create-discord-app .
 ```
 
-# Specific dir
+## Specific dir
 ```sh
 $ npx create-discord-app --create --dir=dirName
 ```
