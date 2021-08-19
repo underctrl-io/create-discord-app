@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import fs from 'fs';
-import { prompt } from 'inquirer';
+import inquirer from 'inquirer';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { CreateDiscordApp } from '../src/create.js';
@@ -36,7 +36,7 @@ export async function handleCommand(args) {
     else if (args.discord) console.log(`${chalk.whiteBright("Join Our Discord Server")}:    ${chalk.blueBright("https://discord.gg/2SUybzb")}`);
     else if (args.create || (args._[0] && args._[0] === ".")) {
         if (args.create && !args.dir) return console.log(chalk.redBright("[ERROR] Argument `dir` was not specified!"));
-        const { ok, type, language, lib, token } = await prompt([prompts.dir, prompts.type, prompts.language, prompts.lib, prompts.token]);
+        const { ok, type, language, lib, token } = await inquirer.prompt([prompts.dir, prompts.type, prompts.language, prompts.lib, prompts.token]);
         if (!ok) return console.log(chalk.redBright("Exiting create-discord-app..."));
 
         let projectdir = `${__dirname}/templates/${type}/${languages[language]}/${libraries[lib]}`;
