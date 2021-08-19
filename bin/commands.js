@@ -19,10 +19,14 @@ const libraries = {
 };
 
 const help = `
-    ${chalk.whiteBright("--discord")}       : Shows discord support server invite
-    ${chalk.whiteBright("--help")}          : Shows help menu
-    ${chalk.whiteBright("--version")}       : Shows CDA version
-    ${chalk.whiteBright("--create")}        : Create Project
+    ${chalk.whiteBright("--discord")}       : Shows discord support server invite.
+    ${chalk.whiteBright("--help")}          : Shows help menu.
+    ${chalk.whiteBright("--version")}       : Shows CDA version.
+    ${chalk.whiteBright("--create")}        : Create Project.
+
+    Subcommands:
+        ${chalk.whiteBright("--noGit")}     : Will not initialize git repository.
+        ${chalk.whiteBright("--gitCommit")} : Custom git commit while initializing the git repository.
 
     Examples:
         ${chalk.gray("$")} ${chalk.blueBright("create-discord-app .")}
