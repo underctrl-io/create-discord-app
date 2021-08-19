@@ -1,4 +1,4 @@
-const prompts = {
+export const prompts = {
     dir: {
         name: "ok",
         type: "confirm",
@@ -37,5 +37,3 @@ const prompts = {
         message: "Enter your bot token:"
     }
 };
-
-export { prompts } ;
