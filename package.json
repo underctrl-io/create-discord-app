@@ -12,15 +12,15 @@
   "author": "skrx10",
   "license": "MIT",
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.12"
   },
   "dependencies": {
-    "chalk": "^4.1.0",
-    "fs-extra": "^9.0.1",
-    "inquirer": "^7.3.3",
-    "log-symbols": "^4.0.0",
-    "ora": "^5.1.0",
-    "yargs": "^16.1.0"
+    "chalk": "^4.1.2",
+    "fs-extra": "^10.0.0",
+    "inquirer": "^8.1.2",
+    "log-symbols": "^5.0.0",
+    "ora": "^5.4.1",
+    "yargs": "^17.1.1"
   },
   "directories": {
     "test": "test"
