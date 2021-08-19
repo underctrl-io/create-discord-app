@@ -9,7 +9,7 @@
     "create-discord-app": "bin/cda.js",
     "cda": "bin/cda.js"
   },
-  "author": "Snowflake Studio ❄",
+  "author": "skrx10",
   "license": "MIT",
   "devDependencies": {
     "nodemon": "^2.0.6"
