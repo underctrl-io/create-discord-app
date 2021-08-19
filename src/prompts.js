@@ -1,9 +1,4 @@
 export const prompts = {
-    dir: {
-        name: "ok",
-        type: "confirm",
-        message: "Are you sure you want to generate discord bot project?"
-    },
     type: {
         name: "type",
         type: "list",
