@@ -13,7 +13,7 @@ export class CreateDiscordApp {
         this.force = !!force;
     }
 
-    initGit(gitCommit) {
+    initGit(gitCommit = "created discord app.") {
         const commands = ["git init", "git add .", `git commit -m "${gitCommit}"`];
         const finalizingLoader = ora(chalk.blueBright("Finalizing...")).start();
 
@@ -26,7 +26,7 @@ export class CreateDiscordApp {
         finalizingLoader.succeed(chalk.greenBright("Successfully created a discord bot project!"));
     }
 
-    init(token = null, ops = { language: null, gitCommit = "created discord app." }) {
+    init(token = null, ops = { language: null }) {
         if (this.force) console.log(symbols.warning, chalk.yellowBright("You have used --force, I hope you know what you are doing."));
         if (!this.source) return console.log(symbols.error, chalk.redBright("No source file(s) specified!"));
 
@@ -57,7 +57,7 @@ export class CreateDiscordApp {
             cp.exec(this.path === "." ? command : `cd ${this.path} && ${installCommand}`, (error) => {
                 if (error) return depInstaller.warn(chalk.yellowBright("Generated project but couldn't install dependencies, please try again manually!"));
                 depInstaller.succeed(chalk.greenBright("Successfully installed dependencies!"));
-                return this.initGit();
+                return this.initGit(ops.gitCommit);
             });
         });
     }
