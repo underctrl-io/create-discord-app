@@ -27,6 +27,8 @@ const help = `
     Subcommands:
         ${chalk.whiteBright("--noGit")}     : Will not initialize git repository.
         ${chalk.whiteBright("--gitCommit")} : Custom git commit while initializing the git repository.
+        ${chalk.whiteBright("--dir")}       : Custom directory to create the discord app.
+        ${chalk.whiteBright("--force")}     : Will clear the directory where the app is going to be created.
 
     Examples:
         ${chalk.gray("$")} ${chalk.blueBright("create-discord-app .")}
