@@ -1,19 +1,16 @@
 # Create Discord App
+A Simple CLI to generate discord bot projects easily!
 
-##### A package for generating discord bot projects 
-
-
-# Note
-##### ⚠ | Avoid using this package if you don't have a solid understanding in javascript
-
-
-# Installation
+# Example
+## Current Dir
 ```sh
-$ npm i create-discord-app -g
+$ npx create-discord-app .
 ```
 
-
-# Create a project
+## Specific dir
 ```sh
-npx create-discord-app 
+$ npx create-discord-app --create --dir=dirName
 ```
+
+# Join Our Discord Server
+[![](https://i.imgur.com/f6hNUfc.png)](https://discord.gg/2SUybzb)

@@ -1,0 +1,19 @@
+{
+  "name": "discord-bot",
+  "version": "1.0.0",
+  "description": "Simple discord bot created with create-discord-app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "discord.js": "^12.4.1",
+    "dotenv": "^8.2.0"
+  }
+}

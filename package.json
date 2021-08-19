@@ -1,27 +1,45 @@
 {
   "name": "create-discord-app",
-  "version": "1.0.3",
-  "description": "A package for easily generating discord bot projects",
-  "main": "./lib/index.js",
-  "license": "MIT",
+  "version": "2.0.3",
+  "description": "A Simple CLI to generate discord bot projects easily!",
+  "main": "bin/cda.js",
   "preferGlobal": true,
+  "type": "module",
   "bin": {
-    "create-discord-app": "./bin/dbm.js"
+    "create-discord-app": "bin/cda.js",
+    "cda": "bin/cda.js"
+  },
+  "author": "Snowflake Studio ❄",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.6"
   },
   "dependencies": {
     "chalk": "^4.1.0",
     "fs-extra": "^9.0.1",
     "inquirer": "^7.3.3",
-    "shelljs": "^0.8.4",
-    "yargs": "^16.0.3"
+    "log-symbols": "^4.0.0",
+    "ora": "^5.1.0",
+    "yargs": "^16.1.0"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevSnowflake/create-discord-app.git"
   },
   "keywords": [
+    "cda",
+    "create-discord-app",
     "discord.js",
     "discord",
-    "cli",
-    "discordbot",
-    "discord-cli",
-    "dis",
-    "create-discord-app"
-  ]
+    "bot",
+    "project",
+    "generator"
+  ],
+  "bugs": {
+    "url": "https://github.com/DevSnowflake/create-discord-app/issues"
+  },
+  "homepage": "https://github.com/DevSnowflake/create-discord-app#readme"
 }
