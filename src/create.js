@@ -1,11 +1,11 @@
-const chalk = require("chalk");
-const fs = require("fs");
-const fse = require("fs-extra");
-const cp = require("child_process");
-const ora = require("ora");
-const symbols = require("log-symbols");
+import chalk from 'chalk';
+import fs from 'fs';
+import fse from 'fs-extra';
+import cp from 'child_process';
+import ora from 'ora';
+import symbols from 'log-symbols';
 
-class Create {
+export default class Create {
 
     constructor(path = ".", source = null, force = false) {
         this.path = path || ".";
@@ -80,5 +80,3 @@ class Create {
     }
 
 }
-
-module.exports = Create;

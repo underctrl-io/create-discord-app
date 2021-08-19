@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-const yargs = require("yargs/yargs");
-const { hideBin } = require("yargs/helpers");
+import yargs from 'yargs';
+import { hideBin } from "yargs/helpers";
 const argv = yargs(hideBin(process.argv))
     .help(false)
     .version(false)
@@ -8,6 +8,6 @@ const argv = yargs(hideBin(process.argv))
     .alias("v", "version")
     .argv;
 
-const commands = require("../command.js");
+import { command } from '../command.js';
 
-commands(argv);
+command(argv);

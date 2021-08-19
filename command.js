@@ -1,9 +1,18 @@
-const chalk = require("chalk");
-const { version } = require("./package.json");
-const create = require("./src/create");
-const { prompt } = require("inquirer");
-const prompts = require("./src/prompts");
-const path = require("path");
+import chalk from 'chalk';
+import fs from 'fs';
+import create from './src/create.js';
+import inq from 'inquirer';
+import { prompts } from './src/prompts.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const { prompt } = inq;
+const pkg = fs.readFileSync('./package.json');
+const content = JSON.parse(pkg);
+const version = content.version;
 
 const help = `
     ${chalk.cyanBright("Create Discord App")}
@@ -18,7 +27,7 @@ const help = `
         ${chalk.gray("$")} ${chalk.blueBright("create-discord-app --create --dir=projectDirName")}
 `;
 
-module.exports = async (args) => {
+const command = async (args) => {
     if (args.help) {
         console.log(help);
     } else if (args.version) {
@@ -75,3 +84,4 @@ module.exports = async (args) => {
         console.log(help);
     }
 };
+export { command };
