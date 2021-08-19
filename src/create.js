@@ -7,26 +7,26 @@ import symbols from 'log-symbols';
 
 export class CreateDiscordApp {
 
-    constructor(path = ".", source = null, force = false) {
-        this.path = path || ".";
+    constructor(args, source = null) {
+        this.args = args;
+        this.path = args._[0] === "." ? "." : args.dir;
+        this.force = !!args.force;
         this.source = source;
-        this.force = !!force;
     }
 
-    initGit(gitCommit = "created discord app.") {
-        const commands = ["git init", "git add .", `git commit -m "${gitCommit}"`];
-        const finalizingLoader = ora(chalk.blueBright("Finalizing...")).start();
-
+    initGit() {
+        if (this.args.noGit) return;
+        const commands = ["git init", "git add .", `git commit -m "${this.args.gitCommit}"`];
         for (const command of commands) {
             try {
                 cp.execSync(this.path === "." ? command : `cd ${this.path} && ${command}`);
             } catch(e) { /* Do nothing */ }
         }
 
-        finalizingLoader.succeed(chalk.greenBright("Successfully created a discord bot project!"));
+        console.log(symbols.success, chalk.greenBright("Initialized git repositiory!"));
     }
 
-    init(token = null, ops = { language: null }) {
+    init(token = null, language = null) {
         if (this.force) console.log(symbols.warning, chalk.yellowBright("You have used --force, I hope you know what you are doing."));
         if (!this.source) return console.log(symbols.error, chalk.redBright("No source file(s) specified!"));
 
@@ -51,13 +51,14 @@ export class CreateDiscordApp {
 
             copyFileLoader.succeed(chalk.cyanBright("Finished copying files!"));
             const depInstaller = ora(chalk.blueBright("Installing dependencies...")).start();
-            const installCommand = this.getInstallCommand(ops.language);
+            const installCommand = this.getInstallCommand(language);
             if (!installCommand) return depInstaller.warn(chalk.yellowBright("Generated project but couldn't find an install command, please try again to install dependencies manually!"));
 
             cp.exec(this.path === "." ? command : `cd ${this.path} && ${installCommand}`, (error) => {
                 if (error) return depInstaller.warn(chalk.yellowBright("Generated project but couldn't install dependencies, please try again manually!"));
                 depInstaller.succeed(chalk.greenBright("Successfully installed dependencies!"));
-                return this.initGit(ops.gitCommit);
+                this.initGit();
+                console.log(symbols.success, chalk.greenBright("Successfully created a discord bot project!"));
             });
         });
     }

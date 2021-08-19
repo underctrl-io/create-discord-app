@@ -6,8 +6,7 @@ import { fileURLToPath } from 'url';
 import { CreateDiscordApp } from '../src/create.js';
 import { prompts } from '../src/prompts.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = dirname(dirname(fileURLToPath(import.meta.url)));
 
 const languages = {
     javascript: "JavaScript",
@@ -43,11 +42,12 @@ export async function handleCommand(args) {
         }]);
 
         if (!ok) return console.log(chalk.redBright("Exiting create-discord-app..."));
-        const { type, language, lib, token } = await inquirer.prompt([prompts.dir, prompts.type, prompts.language, prompts.lib, prompts.token]);
+        const { type, language, lib, token } = await inquirer.prompt([prompts.type, prompts.language, prompts.lib, prompts.token]);
         let projectdir = `${__dirname}/templates/${type}/${languages[language]}/${libraries[lib]}`;
         if (!fs.existsSync(projectdir)) console.log(chalk.redBright("[Error] Couldn't locate template files!"));
+        console.log(''); // Just prints an line. dont delete it.
 
-        const cda = new CreateDiscordApp(args._[0] === "." ? "" : args.dir, projectdir, !!args.force);
-        cda.init(token, { language, gitCommit: args.gitCommit });
+        const cda = new CreateDiscordApp(args, projectdir);
+        cda.init(token, language);
     } else console.log(`${chalk.whiteBright('No proper arguments has been found. Try checking the list of arguments.')}\n\n${help}`);
 }
