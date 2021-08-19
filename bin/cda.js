@@ -8,6 +8,8 @@ const argv = yargs(hideBin(process.argv))
     .version(false)
     .alias("h", "help")
     .alias("v", "version")
+    .alias("c", "create")
+    .alias("f", "force")
     .argv;
 
 handleCommand(argv);
