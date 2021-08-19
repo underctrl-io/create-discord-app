@@ -65,18 +65,7 @@ export default class Create {
     }
 
     getInstallCommand(language = "js") {
-        let cmd = "";
-        switch(language) {
-            case "node":
-            case "js":
-                cmd = "npm i";
-                break;
-            default:
-                cmd = null;
-        }
-
-        return cmd;
-
+        return language === "node" || language === "js" ? "npm i" : null;
     }
 
 }
