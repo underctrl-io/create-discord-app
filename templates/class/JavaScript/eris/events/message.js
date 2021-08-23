@@ -9,7 +9,7 @@ class Message {
 
         const prefix = this.client.config.PREFIX;
 
-        if (message.content[0] !== prefix) return;
+        if (!message.content.startsWith(prefix)) return;
 
         const args = message.content.slice(prefix.length).trim().split(/\s+/);
         const cmd = args.shift().toLowerCase();
