@@ -9,9 +9,9 @@ class Message {
 
         const prefix = this.client.config.PREFIX;
 
-        if (message.content.indexOf(prefix) !== 0) return;
+        if (message.content[0] !== prefix) return;
 
-        const args = message.content.slice(prefix.length).trim().split(" ");
+        const args = message.content.slice(prefix.length).trim().split(/\s+/);
         const cmd = args.shift().toLowerCase();
 
         const command = this.client.getCommand(cmd);
