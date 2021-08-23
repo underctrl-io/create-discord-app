@@ -64,8 +64,7 @@ export class CreateDiscordApp {
     }
 
     getInstallCommand(language) {
-        if (language == "javascript" || language == "typescript") return "npm i";
-        else return null;
+        if (language === "javascript" || language === "typescript") return "npm i";
+        return null;
     }
-
 }
