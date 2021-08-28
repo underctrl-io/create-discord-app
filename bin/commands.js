@@ -8,15 +8,9 @@ import { prompts } from '../src/prompts.js';
 
 const __dirname = dirname(dirname(fileURLToPath(import.meta.url)));
 
-const languages = {
-    javascript: "JavaScript",
-    typescript: "TypeScript"
-};
+const languages = Object.fromEntries(prompts.language.choices.map(x => [ x.value, x.name ]));
 
-const libraries = {
-    djs: 'discordjs',
-    eris: 'eris'
-};
+const libraries = Object.fromEntries(prompts.lib.choices.map(x => [ x.value, x.name ]));
 
 const help = `
     ${chalk.whiteBright("--discord")}       : Shows discord support server invite.

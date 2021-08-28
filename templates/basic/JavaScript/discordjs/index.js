@@ -49,10 +49,9 @@ client.on("warn", console.warn);
 client.on("error", console.error);
 
 client.on("message", async (message) => {
-    if (message.author.bot) return;
-    if (message.content.indexOf(config.PREFIX) !== 0) return;
+    if (message.author.bot || message.content.indexOf(config.PREFIX) !== 0) return;
 
-    const args = message.content.slice(config.PREFIX.length).trim().split(" ");
+    const args = message.content.slice(config.PREFIX.length).trim().split(/\s+/);
     const cmd = args.shift().toLowerCase();
     const command = client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
 

@@ -11,7 +11,7 @@ class Message {
 
         if (message.content.indexOf(prefix) !== 0) return;
 
-        const args = message.content.slice(prefix.length).trim().split(" ");
+        const args = message.content.slice(prefix.length).trim().split(/\s+/);
         const cmd = args.shift().toLowerCase();
 
         const command = this.client.getCommand(cmd);

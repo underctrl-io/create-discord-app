@@ -2,8 +2,6 @@ import Discord from "discord.js";
 import { Command as CMD, Client } from "../../";
 
 export default class Command implements CMD {
-    constructor() { }
-    
     help = {
         name: "reverse",
         description: "Reverse command",
