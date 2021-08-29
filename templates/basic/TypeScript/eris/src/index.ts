@@ -7,11 +7,7 @@ dotenv.config();
 
 import Eris from "eris";
 import fs from "fs";
-
-const config: {
-    TOKEN: string,
-    PREFIX: string
-} = require("../config.js");
+import config from './config';
 
 class Client extends Eris.Client {
     commands: Map<string, Command>;

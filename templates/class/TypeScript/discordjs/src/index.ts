@@ -8,10 +8,7 @@ dotenv.config();
 import Discord from "discord.js";
 import fs from "fs";
 
-const config: {
-    TOKEN: string,
-    PREFIX: string
-} = require("../config.js");
+import config from './config';
 
 export class Client extends Discord.Client {
     commands: Discord.Collection<string, Command>;
@@ -92,7 +89,7 @@ client.on("ready", () => {
 client.on("warn", console.warn);
 client.on("error", console.error);
 
-client.on("message", async (message) => {
+client.on("messageCreate", async (message) => {
     if (message.author.bot || message.content.indexOf(config.PREFIX) !== 0) return;
 
     const args = message.content.slice(config.PREFIX.length).trim().split(/\s+/);
