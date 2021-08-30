@@ -29,7 +29,7 @@ const help = `
         ${chalk.gray("$")} ${chalk.blueBright("create-discord-app --create --dir=projectDirName")}
 `;
 
-export async function handleCommand(args) {
+export default async function handleCommand(args) {
     if (args.help) console.log(`${chalk.cyanBright("Create Discord App")}\n\n${help}`);
     else if (args.version) console.log(chalk.whiteBright(`v${JSON.parse(fs.readFileSync('./package.json')).version}`));
     else if (args.discord) console.log(`${chalk.whiteBright("Join Our Discord Server")}:    ${chalk.blueBright("https://discord.gg/2SUybzb")}`);
