@@ -54,7 +54,7 @@ export class CreateDiscordApp {
             const installCommand = this.getInstallCommand(language);
             if (!installCommand) return depInstaller.warn(chalk.yellowBright("Generated project but couldn't find an install command, please try again to install dependencies manually!"));
 
-            cp.exec(this.path === "." ? command : `cd ${this.path} && ${installCommand}`, (error) => {
+            cp.exec(this.path === "." ? installCommand : `cd ${this.path} && ${installCommand}`, (error) => {
                 if (error) return depInstaller.warn(chalk.yellowBright("Generated project but couldn't install dependencies, please try again manually!"));
                 depInstaller.succeed(chalk.greenBright("Successfully installed dependencies!"));
                 this.initGit();
