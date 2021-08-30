@@ -67,4 +67,4 @@ export class CreateDiscordApp {
         if (language === "javascript" || language === "typescript") return "npm i";
         return null;
     }
-}
+}   
