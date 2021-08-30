@@ -22,8 +22,8 @@ export const prompts = {
         type: "list",
         message: "Select your discord library:",
         choices: [
-            { name: "Discord.JS", value: "djs" },
-            { name: "Eris", value: "eris" }
+            { name: "discordjs", value: "djs" },
+            { name: "eris", value: "eris" }
         ]
     },
     token: {
