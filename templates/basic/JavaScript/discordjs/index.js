@@ -1,68 +1,35 @@
-////////////////////////////////////////////
-/////         Create Discord App       /////
-////////////////////////////////////////////
 
-require("dotenv").config();
-const Discord = require("discord.js");
-const client = new Discord.Client();
-const config = require("./config.js");
-const fs = require("fs");
-client.commands = new Discord.Collection();
-client.aliases = new Discord.Collection();
+const fs = require('fs');
+const { Client, Collection, Intents } = require('discord.js');
+const { TOKEN } = require('./config.js');
 
-// load commands
-// Read command dir and get ctg
-fs.readdir(`${__dirname}/commands`, (error, ctg) => {
-    if (error) throw error;
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-    // loop through ctg
-    ctg.forEach(category => {
+client.commands = new Collection();
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-        // read each ctg and get command file
-        fs.readdir(`${__dirname}/commands/${category}`, (err, commands) => {
-            if (err) throw err;
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	client.commands.set(command.data.name, command);
+}
 
-            // Load commands in memory
-            commands.forEach(command => {
-                const cmd = require(`${__dirname}/commands/${category}/${command}`);
-                if (!cmd.help) throw new Error(`Invalid command file structure ${command}!`);
-
-                // update data
-                cmd.help.category = category;
-                cmd.location = `${__dirname}/commands/${category}/${command}`;
-
-                console.log(`Loading command ${command}...`);
-
-                // load command in memory
-                client.commands.set(cmd.help.name, cmd);
-                if (cmd.help.aliases && Array.isArray(cmd.help.aliases)) cmd.help.aliases.forEach(alias => client.aliases.set(alias, cmd.help.name));
-            });
-        });
-    });
+client.once('ready', () => {
+	console.log('Ready!');
 });
 
-// basic events
-client.on("ready", () => {
-    console.log("Bot is online!");
-});
-client.on("warn", console.warn);
-client.on("error", console.error);
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
 
-client.on("messageCreate", async (message) => {
-    if (message.author.bot || message.content.indexOf(config.PREFIX) !== 0) return;
+	const command = client.commands.get(interaction.commandName);
 
-    const args = message.content.slice(config.PREFIX.length).trim().split(/\s+/);
-    const cmd = args.shift().toLowerCase();
-    const command = client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
+	if (!command) return;
 
-    if (!command) return;
-
-    try {
-        await command.run(client, message, args);
-    } catch(e) {
-        console.error(e);
-        message.channel.send(`Something went wrong while executing command "**${command}**"!`);
-    }
+	try {
+		await command.execute(interaction);
+	} catch (error) {
+		console.error(error);
+		return interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+	}
 });
 
-client.login(config.TOKEN);
+client.login(TOKEN);
