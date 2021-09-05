@@ -4,9 +4,11 @@
   "description": "Simple discord bot created with create-discord-app",
   "main": "build/index.js",
   "scripts": {
-    "start": "node .",
-    "dev": "npm run build && npm start",
-    "build": "tsc"
+    "start:dev": "ts-node src/index",
+    "deploy": "ts-node src/deployment",
+    "build": "tsc",
+    "start":"node .",
+    "deploy:prod":"node build/deployment.js"
   },
   "author": "",
   "license": "MIT",
