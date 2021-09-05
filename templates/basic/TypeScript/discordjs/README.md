@@ -9,7 +9,7 @@ Please start by deploying the slash commands to discord.
 
 # Start Your Bot (Production)
 
-`npm start`
+`npm run start:dev`
 
 # Start Your Bot (Development)
 
