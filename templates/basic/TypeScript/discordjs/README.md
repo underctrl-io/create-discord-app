@@ -2,13 +2,16 @@
 
 This project was created with **create-discord-app**!
 
+# Deploy The Slash Commands 
+Please start by deploying the slash commands to discord.
+
+`npm run deploy`
+
 # Start Your Bot (Production)
 
 `npm start`
 
 # Start Your Bot (Development)
-
-You must manually restart the process after changes!
 
 `npm run dev`
 

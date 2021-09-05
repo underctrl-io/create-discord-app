@@ -1,12 +1,12 @@
 
 const config: ConfigType = {
-    TOKEN: process.env.TOKEN,
-    PREFIX: "!"
+    TOKEN: process.env.TOKEN || "",
+    CLIENT_ID: ""
 }
 
 interface ConfigType {
     TOKEN: string,
-    PREFIX: string
+    CLIENT_ID: string
 }
 
 export default config;

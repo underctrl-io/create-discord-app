@@ -1,107 +1,35 @@
-////////////////////////////////////////////
-/////         Create Discord App       /////
-////////////////////////////////////////////
+import fs from 'fs';
+import { Client, Collection, Intents } from 'discord.js';
+import config from './config'
 
-import * as dotenv from "dotenv";
-dotenv.config();
+const { TOKEN } = config;
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-import Discord from "discord.js";
-import fs from "fs";
+(client as any).commands = new Collection();
+const commandFiles = fs.readdirSync('./src/commands').filter(file => file.endsWith('.ts'));
 
-import config from './config';
-
-class Client extends Discord.Client {
-    commands: Discord.Collection<string, Command>;
-    aliases: Discord.Collection<string, string>;
-
-    constructor(options?: Discord.ClientOptions) {
-        super(options);
-
-        this.commands = new Discord.Collection();
-        this.aliases = new Discord.Collection();
-    }
-
-    resolveCommand(name: string) {
-        const byName = this.commands.get(name);
-        if (byName) return byName;
-        const byAlias = this.aliases.get(name);
-        if (byAlias) return this.commands.get(byAlias);
-        return undefined;
-    }
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	(client as any).commands.set(command.data.name, command);
 }
 
-export type CommandRun = (client: Client, message: Discord.Message, args: string[]) => any;
-
-export interface CommandHelp {
-    name: string;
-    description: string;
-    aliases: string[];
-    category?: string;
-}
-
-export interface Command {
-    run: CommandRun;
-    help: CommandHelp;
-    location?: string;
-}
-
-const client = new Client();
-
-// load commands
-// Read command dir and get ctg
-fs.readdir("./commands", (error, ctg) => {
-    if (error) throw error;
-
-    // loop through ctg
-    ctg.forEach(category => {
-
-        // read each ctg and get command file
-        fs.readdir(`./commands/${category}`, (err, commands) => {
-            if (err) throw err;
-
-            // Load commands in memory
-            commands.forEach(command => {
-                const cmd: Command = require(`./commands/${category}/${command}`).default;
-                if (!cmd.help) throw new Error(`Invalid command file structure ${command}!`);
-
-                // update data
-                cmd.help.category = category;
-                cmd.location = `./commands/${category}/${command}`;
-
-                console.log(`Loading command ${command}...`);
-
-                // load command in memory
-                client.commands.set(cmd.help.name, cmd);
-                if (cmd.help.aliases && Array.isArray(cmd.help.aliases)) cmd.help.aliases.forEach(alias => client.aliases.set(alias, cmd.help.name));
-            });
-        });
-    });
+client.once('ready', () => {
+	console.log('Ready!');
 });
 
-// basic events
-client.on("ready", () => {
-    console.log("Bot is online!");
-});
-client.on("warn", console.warn);
-client.on("error", console.error);
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
 
-client.on("messageCreate", async (message) => {
-    if (message.author.bot || message.content.indexOf(config.PREFIX) !== 0) return;
+	const command = (client as any).commands.get(interaction.commandName);
 
-    const args = message.content.slice(config.PREFIX.length).trim().split(/\s+/);
-    const cmd = args.shift()?.toLowerCase();
+	if (!command) return;
 
-    if (!cmd) return;
-    let command = client.resolveCommand(cmd);
-
-    if (!command) return;
-
-    try {
-        await command.run(client, message, args);
-    } catch(e) {
-        console.error(e);
-        message.channel.send(`Something went wrong while executing command "**${command}**"!`);
-    }
+	try {
+		await command.execute(interaction);
+	} catch (error) {
+		console.error(error);
+		return interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+	}
 });
 
-client.login(config.TOKEN);
+client.login(TOKEN);
