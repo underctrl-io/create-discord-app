@@ -1,11 +1,8 @@
-export default{
-	PREFIX: "+",
-	owner: {
-		id: "749936830098571335", // Example : 749936830098571335
-		username: "User#tag" // Example : tj#7532
-	},
-	tokens: {
-		discord: 'DISCORD_BOT_TOKEN'
-	},
-	logs: ''
-}
+"use strict";
+const config = {
+    prefix: "+",
+    token: "YOUR_BOT_TOKEN",
+    developers: ["749936830098571335"]
+};
+
+export default config;
