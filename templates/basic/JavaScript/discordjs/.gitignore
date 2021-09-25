@@ -1,3 +1,13 @@
+# Packages
 node_modules/
-package-lock.json
-.env
+yarn.lock
+
+# Log files
+logs/
+*.log
+
+# Miscellaneous
+.tmp/
+.vscode/
+.idea/
+.DS_Store
