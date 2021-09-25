@@ -1,0 +1,28 @@
+{
+	"version": "2.4.2",
+	"compilerOptions": {
+		"lib": [
+			"es6"
+		],
+		"esModuleInterop": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"noEmitOnError": true,
+		"noImplicitAny": true,
+		"noUnusedLocals": true, /* Report errors on unused locals. */
+		"noUnusedParameters": true,
+		"outDir": "./dist",
+		"rootDir": "./src",
+		"removeComments": false,
+		"sourceMap": false,
+		"strict": true,
+		"target": "es6",
+		"skipLibCheck": true
+	},
+	"exclude": [
+		"node_modules",
+		"ignore"
+	]
+}

@@ -1,4 +1,26 @@
-node_modules/
-.env
+# node_module
+node_modules
+archives
+beta
+# credentials
+#credentials.js
+# log
 package-lock.json
-build
+#*.log
+#*.lock
+
+#config
+configuration.js
+configurationdev.js
+configurationbot.js
+
+config.ts
+config.js
+
+config.dev.ts
+config.dev.js
+
+config.prod.ts
+config.prod.js
+
+ignore
