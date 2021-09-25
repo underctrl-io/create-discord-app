@@ -1,35 +1,45 @@
-import fs from 'fs';
-import { Client, Collection, Intents } from 'discord.js';
-import config from './config'
+"use strict";
+import { Client, Collection, Intents } from "discord.js";
+import { readdir, readdirSync } from "fs";
+import config from "./config";
 
-const { TOKEN } = config;
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
-
-(client as any).commands = new Collection();
-const commandFiles = fs.readdirSync('./src/commands').filter(file => file.endsWith('.ts'));
-
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	(client as any).commands.set(command.data.name, command);
+export interface runEvent {
+  cooldowns: any;
+  commands: any;
+  ws: any;
+  client: Client;
+  dev: boolean;
 }
 
-client.once('ready', () => {
-	console.log('Ready!');
+export const client = new Client({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+});
+export const commands: Collection<string[], (event: runEvent) => any> =
+  new Collection();
+const dev: boolean = process.env.NODE_ENV === "dev";
+
+readdir(__dirname + "/commands/", async (err: any, allFiles: string[]) => {
+  if (err) return console.log(err);
+  else
+    for (let file of allFiles) {
+      const props: string[] = readdirSync(`${__dirname}/commands/${file}`);
+      for (let i of props) {
+        const Load: any = await import(`${__dirname}/commands/${file}/${i}`);
+        const Command: any = await new Load.default(client);
+        commands.set(Command.help.name, Command);
+      }
+    }
 });
 
-client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
-
-	const command = (client as any).commands.get(interaction.commandName);
-
-	if (!command) return;
-
-	try {
-		await command.execute(interaction);
-	} catch (error) {
-		console.error(error);
-		return interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-	}
+readdir(__dirname + "/events", async (err: any, allFiles: string[]) => {
+  if (err) return console.log(err);
+  else
+    for (let file of allFiles) {
+      const eventName: string = file.split(".")[0];
+      const Load: any = await import(`${__dirname}/events/${file}`);
+      const event: any = await new Load.default(client);
+      client.on(eventName, (...args: string[]) => event.execute(...args));
+    }
 });
 
-client.login(TOKEN);
+client.login(config.token);
