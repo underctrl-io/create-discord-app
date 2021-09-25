@@ -1,19 +1,20 @@
 {
-    "name": "discord-bot",
-    "version": "1.0.0",
-    "description": "Simple discord bot created with create-discord-app",
-    "main": "index.js",
-    "scripts": {
-        "start": "node .",
-        "dev": "nodemon ."
-    },
-    "author": "devSnowflake",
-    "license": "MIT",
-    "devDependencies": {
-        "nodemon": "^2.0.6"
-    },
-    "dependencies": {
-        "discord.js": "^13.1.0",
-        "dotenv": "^8.2.0"
-    }
+  "name": "cda-template",
+  "version": "1.0.0",
+  "main": "src/index",
+  "author": "Adonis Tremblay",
+  "license": "MIT",
+  "scripts":{
+    "start":"node src/index"
+  },
+  "devDependencies": {
+    "eslint": "^7.0.0",
+    "eslint-config-tesseract": "^0.0.2"
+  },
+  "dependencies": {
+    "discord.js": "^13.0.0-dev.4d53d0f.1626566655",
+    "glob": "^7.1.6",
+    "path": "^0.12.7",
+    "util": "^0.12.3"
+  }
 }
