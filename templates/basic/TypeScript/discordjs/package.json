@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon src/index.ts",
     "build": "tsc",
-    "start": "cross-env NODE_ENV=production && node build/index.js"
+    "start": "cross-env NODE_ENV=production node build/index.js"
   },
   "author": "Shisui",
   "license": "MIT",
