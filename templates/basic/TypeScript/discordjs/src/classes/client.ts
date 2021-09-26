@@ -1,5 +1,6 @@
 // Importing the required libraries
 import Discord, { ApplicationCommandOption, ClientOptions, Collection, CommandInteraction } from 'discord.js';
+import config from '../config';
 import { readdirSync } from 'fs';
 
 // Exporting the client class
@@ -8,7 +9,7 @@ export default class Client extends Discord.Client {
     commands: Collection<string, command> = new Collection();
     folder: string = "src";
     extension: string = "ts";
-    owners: string[] = ["441943765855240192"];
+    owners: string[] = config.owners;
 
     constructor(token: string | undefined, options: ClientOptions) {
         super(options);
