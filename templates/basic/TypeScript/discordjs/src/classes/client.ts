@@ -1,12 +1,12 @@
 // Importing the required libraries
 import Discord, { ApplicationCommandOption, ClientOptions, Collection, CommandInteraction } from 'discord.js';
 import config from '../config';
-import { readdirSync } from 'fs';
+import { promises } from 'fs';
 
 // Exporting the client class
 export default class Client extends Discord.Client {
     // Defining the custom properties
-    commands: Collection<string, command> = new Collection();
+    commands: Collection<string, Command> = new Collection();
     folder: string = "src";
     extension: string = "ts";
     owners: string[] = config.owners;
@@ -26,18 +26,20 @@ export default class Client extends Discord.Client {
         this.login(token);
     }
 
-    setCommands() {
+    async setCommands() {
         // Reading the command directory
-        readdirSync(`${process.cwd()}/${this.folder}/commands`).forEach(cat => {
+        const categories = await promises.readdir(`${process.cwd()}/${this.folder}/commands`);
+
+        categories.forEach(async cat => {
             // Reading the  directories which are inside command directory
-            const commands = readdirSync(`${process.cwd()}/${this.folder}/commands/${cat}`).filter(file => file.endsWith(this.extension));
+            const commands = (await promises.readdir(`${process.cwd()}/${this.folder}/commands/${cat}`)).filter(file => file.endsWith(this.extension));
 
             for (let i = 0; i < commands.length; i++) {
-
                 const file = commands[i];
 
                 // Getting the command
-                const command: command = require(`../commands/${cat}/${file}`)?.default || {};
+                const command: Command = require(`../commands/${cat}/${file}`)?.default || {};
+
                 // Throwing the error if the file do not have a command
                 if (!command.data || !command.execute) throw new SyntaxError("A command should have `data` property and a `execute` method");
 
@@ -48,9 +50,11 @@ export default class Client extends Discord.Client {
     }
 
     // Handling the events
-    handleEvents() {
+    async handleEvents() {
         // Reading the event directory
-        readdirSync(`${process.cwd()}/${this.folder}/events`).forEach(event => {
+        const events = await promises.readdir(`${process.cwd()}/${this.folder}/events`);
+        
+        for (const event of events) {
             // Getting the event
             const eventName = event.split(".")[0];
             const Event = require(`../events/${event}`)?.default;
@@ -64,14 +68,14 @@ export default class Client extends Discord.Client {
             } else {
                 this.on(eventName, (...args) => Event.execute(this, ...args))
             }
-        })
+        }
     }
 }
 
 // Defining types
-type commandExecute = (client: Client, message: CommandInteraction) => any;
+type CommandExecute = (client: Client, message: CommandInteraction) => Promise<void>;
 
-interface command {
+interface Command {
     data: {
         name: string,
         description: string,
@@ -79,5 +83,5 @@ interface command {
     },
     category?: string,
 
-    execute: commandExecute
+    execute: CommandExecute
 }

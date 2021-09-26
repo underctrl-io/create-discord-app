@@ -5,7 +5,8 @@
   "main": "build/index.js",
   "scripts": {
     "dev": "nodemon src/index.ts",
-    "build": "set NODE_ENV=build && tsc && node build/index.js"
+    "build": "tsc",
+    "start": "cross-env NODE_ENV=production && node build/index.js"
   },
   "author": "Shisui",
   "license": "MIT",
