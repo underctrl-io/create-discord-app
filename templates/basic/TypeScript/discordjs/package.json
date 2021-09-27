@@ -1,0 +1,21 @@
+{
+  "name": "discord-bot-ts",
+  "description": "This project was created with **create-discord-app**!",
+  "version": "1.0.0",
+  "main": "build/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.ts",
+    "build": "tsc",
+    "start": "cross-env NODE_ENV=production node build/index.js"
+  },
+  "author": "Shisui",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^16.10.0",
+    "nodemon": "^2.0.13"
+  },
+  "dependencies": {
+    "discord.js": "^13.1.0",
+    "dotenv": "^10.0.0"
+  }
+}
