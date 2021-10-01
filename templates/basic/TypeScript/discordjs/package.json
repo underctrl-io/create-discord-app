@@ -1,0 +1,27 @@
+{
+  "name": "discord-js-template",
+  "version": "1.0.0",
+  "description": "basic typescript template",
+  "scripts": {
+    "prebuild": "node -p \"'export const VERSION = ' + JSON.stringify(require('./package.json').version) + ';'\" > src/version.ts",
+    "build": "tsc",
+    "lint": "eslint \"**/*.ts\"",
+    "start": "node dist/index.js",
+    "debug": "nodemon src/index.ts"
+  },
+  "author": "Adonis Tremblay <adonis@sernex.tech>",
+  "license": "MIT",
+  "dependencies": {
+    "discord-api-types": "^0.22.0",
+    "discord.js": "^13.1.0",
+    "dotenv": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.7.10",
+    "@typescript-eslint/eslint-plugin": "^4.30.0",
+    "@typescript-eslint/parser": "^4.30.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-import": "^2.24.2",
+    "nodemon": "^2.0.12"
+  }
+}
