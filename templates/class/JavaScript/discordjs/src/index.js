@@ -1,5 +1,5 @@
-const MDClient = require('./Structures/MDClient');
-const config = require('../config.json');
+const BotClient = require('./Structures/BotClient');
+const config = require('../config');
 
-const client = new MDClient(config);
+const client = new BotClient(config);
 client.start();

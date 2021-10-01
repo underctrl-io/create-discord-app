@@ -2,7 +2,8 @@
 import { Client, Collection, Intents } from "discord.js";
 import { readdir, readdirSync } from "fs";
 import config from "./config";
-
+import dotenv from 'dotenv';
+dotenv.config();
 export interface runEvent {
   cooldowns: any;
   commands: any;
@@ -42,4 +43,4 @@ readdir(__dirname + "/events", async (err: any, allFiles: string[]) => {
     }
 });
 
-client.login(config.token);
+client.login(process.env.TOKEN ?? process.env.TOKEN : config.token);

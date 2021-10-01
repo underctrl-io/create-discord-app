@@ -1,7 +1,7 @@
 const { Client, Collection, Intents } = require('discord.js');
 const Util = require('./Util.js');
 
-module.exports = class MenuDocsClient extends Client {
+module.exports = class BotClient extends Client {
 
 	constructor(options = {}) {
 		super({
