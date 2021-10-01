@@ -1,3 +1,7 @@
+# Version 3.0 Updates
+> Added *discord.js* **v13** templates.
+> Fixed creation and *prompt* issues.
+
 # Create Discord App
 A Simple CLI to generate discord bot projects easily!
 

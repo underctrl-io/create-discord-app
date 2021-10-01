@@ -1,6 +1,6 @@
 {
   "name": "create-discord-app",
-  "version": "2.0.3",
+  "version": "3.0.0",
   "description": "A Simple CLI to generate discord bot projects easily!",
   "main": "bin/cda.js",
   "preferGlobal": true,
@@ -9,7 +9,7 @@
     "create-discord-app": "bin/cda.js",
     "cda": "bin/cda.js"
   },
-  "author": "skrx10",
+  "author": "adoniswoah",
   "license": "MIT",
   "devDependencies": {},
   "dependencies": {
