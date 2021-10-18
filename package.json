@@ -9,9 +9,6 @@
     "create-discord-app": "bin/cda.js",
     "cda": "bin/cda.js"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "author": "adoniswoah",
   "license": "MIT",
   "dependencies": {
