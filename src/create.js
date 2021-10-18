@@ -25,15 +25,18 @@ export class CreateDiscordApp {
         cp.execSync(
           this.path === "." ? command : `cd ${this.path} && ${command}`
         );
+        
+        console.log(
+          symbols.success,
+          chalk.greenBright("Initialized git repositiory!")
+        );
       } catch (e) {
-        /* Do nothing */
+        console.log(
+          symbols.error,
+          chalk.redBright("Failed to initialize git repositiory!")
+        );
       }
     }
-
-    console.log(
-      symbols.success,
-      chalk.greenBright("Initialized git repositiory!")
-    );
   }
 
   init(token = null, language = null) {
