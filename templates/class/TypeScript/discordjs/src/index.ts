@@ -43,4 +43,4 @@ readdir(__dirname + "/events", async (err: any, allFiles: string[]) => {
     }
 });
 
-client.login(process.env.TOKEN ?? process.env.TOKEN : config.token);
+client.login(process.env.TOKEN ? process.env.TOKEN : config.token);
