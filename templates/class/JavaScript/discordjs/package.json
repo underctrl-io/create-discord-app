@@ -4,8 +4,8 @@
   "main": "src/index",
   "author": "Adonis Tremblay",
   "license": "MIT",
-  "scripts":{
-    "start":"node src/index"
+  "scripts": {
+    "start": "node src/index"
   },
   "devDependencies": {
     "eslint": "^7.0.0",

@@ -1,3 +1,3 @@
 export default {
-    owners: [] // ids of owners
-}
+  owners: [], // ids of owners
+};

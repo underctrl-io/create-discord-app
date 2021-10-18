@@ -1,12 +1,11 @@
-
 const config: ConfigType = {
-    TOKEN: process.env.TOKEN,
-    PREFIX: "!"
-}
+  TOKEN: process.env.TOKEN,
+  PREFIX: "!",
+};
 
 interface ConfigType {
-    TOKEN: string;
-    PREFIX: string;
+  TOKEN: string;
+  PREFIX: string;
 }
 
 export default config;

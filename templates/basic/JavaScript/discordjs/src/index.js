@@ -35,8 +35,8 @@ process.on('SIGINT', () => {
   process.exit(0);
 });
 
-client.login(process.env.TOKEN ? process.env.TOKEN : token).then(()=>{
-  console.log('The bot has started'.bold.cyan)
-})
+client.login(process.env.TOKEN ? process.env.TOKEN : token).then(() => {
+  console.log('The bot has started'.bold.cyan);
+});
 
 module.exports = client;

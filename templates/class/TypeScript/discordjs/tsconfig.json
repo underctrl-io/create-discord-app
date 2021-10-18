@@ -1,18 +1,18 @@
 {
-    "compilerOptions": {
-      "target": "es2015",
-      "module": "commonjs",
-      "strict": true,
-      "allowSyntheticDefaultImports": true,
-      "esModuleInterop": true,
-      "forceConsistentCasingInFileNames": true
-    },
-    "include": [
-      "./src/index.ts",
-      "./src/config.ts",
-      "./src/commands/general/*.ts",
-      "./src/commands/developers/*.ts",
-      "./src/methods/*.ts",
-      "./src/events/*.ts"
-    ]
-  }
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "commonjs",
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "./src/index.ts",
+    "./src/config.ts",
+    "./src/commands/general/*.ts",
+    "./src/commands/developers/*.ts",
+    "./src/methods/*.ts",
+    "./src/events/*.ts"
+  ]
+}
