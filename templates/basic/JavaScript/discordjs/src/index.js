@@ -1,10 +1,14 @@
 'use strict';
 
 require('colors');
+require('dotenv').config()
 
 const { readdirSync } = require('fs');
 const { Client, Collection } = require('discord.js');
-const { token } = require('../config.json');
+// const { token } = require('../config.json'); <- you can use a config.json instead of a .env file
+
+const token = process.env.TOKEN;
+
 const client = new Client({
   // You can define your needed intents. See https://discordjs.guide/popular-topics/intents.html#gateway-intents
   intents: ['GUILDS', 'GUILD_MESSAGES'],
