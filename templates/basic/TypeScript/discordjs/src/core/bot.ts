@@ -6,7 +6,7 @@ import {
   GuildMember,
   MessageEmbed,
   Permissions,
-  TextBasedChannels,
+  TextBasedChannel,
 } from "discord.js";
 import { Command, CommandType } from "../interfaces/command";
 import { APIInteractionGuildMember } from "discord-api-types";
@@ -125,7 +125,7 @@ export class Bot {
    * Prints the help list with all commands of user scope
    * @param {Message} message
    */
-  help(channel: TextBasedChannels, member: GuildMember): void {
+  help(channel: TextBasedChannel, member: GuildMember): void {
     const printCommand = (command: Command): string => {
       if (command.type === CommandType.SLASH) return "";
 
